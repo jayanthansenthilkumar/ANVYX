@@ -1,19 +1,12 @@
 import React from "react";
 import { 
-  Bot, 
-  GraduationCap, 
-  Sparkles, 
-  Globe, 
-  Phone, 
-  ExternalLink, 
-  Heart,
-  Award
+  ExternalLink
 } from "lucide-react";
 import { eventDetails } from "../data/eventData";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-950 border-t border-white/10 text-slate-400 py-16">
+    <footer className="bg-[#FFFFFF] brutal-border-t text-[#111111] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Top Grid */}
@@ -22,69 +15,61 @@ export const Footer: React.FC = () => {
           {/* Brand info */}
           <div className="space-y-4 md:col-span-2">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 p-0.5 flex items-center justify-center text-white">
-                <Bot className="w-5 h-5" />
+              <div className="bg-[#111111] text-[#C8FF00] px-3 py-1.5 font-display font-black text-2xl tracking-tighter brutal-border brutal-shadow-sm">
+                ZENTRA ’26
               </div>
               <div>
-                <span className="text-xl font-black text-white">
-                  ZENTRA <span className="text-cyan-400">'26</span>
+                <span className="font-mono text-xs font-bold uppercase text-[#555555] block">
+                  DEPT OF CSBS × AIML
                 </span>
-                <p className="text-xs text-slate-500 font-mono">Department of CSBS & AIML</p>
+                <span className="font-display font-bold text-sm text-[#111111]">
+                  M. KUMARASAMY COLLEGE OF ENGINEERING
+                </span>
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-400 max-w-md leading-relaxed">
-              Official Keynote & Learning Platform for the AI Chatbot Workshop & Build Challenge held on 23rd October 2026 at Sir C V Raman Hall, M. Kumarasamy College of Engineering, Karur.
+            <p className="text-xs sm:text-sm text-[#444444] font-medium max-w-md leading-relaxed font-sans">
+              Official Keynote & Learning Platform for ZENTRA '26 — AI Chatbot Workshop & Build Challenge held on 23rd October 2026 at Sir C V Raman Hall, M. Kumarasamy College of Engineering (Autonomous), Karur.
             </p>
 
             <div className="pt-2">
-              <span className="inline-block px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-xs font-mono text-cyan-300">
+              <span className="inline-block px-3 py-1 bg-[#111111] text-[#C8FF00] font-mono text-xs font-bold uppercase">
                 "{eventDetails.tagline}"
               </span>
             </div>
           </div>
 
           {/* College Accreditations */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
-              Institution Accreditations
+          <div className="space-y-3 font-mono text-xs">
+            <h4 className="font-bold uppercase tracking-wider text-[#111111] border-b border-[#000000] pb-1">
+              INSTITUTION CREDENTIALS
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-1.5 font-medium">
               {eventDetails.accreditations.map((acc, idx) => (
-                <li key={idx} className="flex items-center gap-2 text-slate-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                <li key={idx} className="flex items-center gap-1.5 text-[#333333]">
+                  <span className="w-1.5 h-1.5 bg-[#C8FF00] border border-[#000000]"></span>
                   <span>{acc}</span>
                 </li>
               ))}
-              <li className="text-slate-400 pt-1">Autonomous • Affiliated to Anna University Chennai</li>
+              <li className="text-[#555555] pt-1">Autonomous • Affiliated to Anna University Chennai</li>
             </ul>
           </div>
 
           {/* Quick Links & Partners */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
-              Community Partners
+          <div className="space-y-3 font-mono text-xs">
+            <h4 className="font-bold uppercase tracking-wider text-[#111111] border-b border-[#000000] pb-1">
+              COMMUNITY PARTNERS
             </h4>
-            <div className="space-y-2 text-xs text-slate-300">
-              <p className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                IBM Skills & IBM Z Explore
-              </p>
-              <p className="flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5 text-indigo-400" />
-                AAROH - Raising Together
-              </p>
-              <p className="flex items-center gap-1.5">
-                <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                Contact: {eventDetails.contact}
-              </p>
+            <div className="space-y-1.5">
+              <p className="text-[#222222]">IBM Skills & IBM Z Explore</p>
+              <p className="text-[#222222]">AAROH - Raising Together</p>
+              <p className="text-[#222222]">Phone: {eventDetails.contact}</p>
               <a 
                 href={`https://${eventDetails.website}`} 
                 target="_blank" 
                 rel="noreferrer"
-                className="text-cyan-400 hover:underline flex items-center gap-1 pt-1"
+                className="text-[#0038FF] font-bold hover:underline flex items-center gap-1 pt-1"
               >
-                <Globe className="w-3.5 h-3.5" />
                 <span>{eventDetails.website}</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
@@ -94,12 +79,12 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Banner */}
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="pt-8 border-t border-[#000000] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#555555]">
           <p>
-            © 2026 M. Kumarasamy College of Engineering (MKCE) • Department of CSBS. All rights reserved.
+            © 2026 M. KUMARASAMY COLLEGE OF ENGINEERING (MKCE) // DEPARTMENT OF CSBS.
           </p>
-          <p className="flex items-center gap-1 text-slate-400">
-            Crafted for 1st-Year Engineers with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> & AI.
+          <p className="font-bold text-[#111111]">
+            ENGINEERED WITH REACT 19 & MODERN BRUTALIST ARCHITECTURE.
           </p>
         </div>
 

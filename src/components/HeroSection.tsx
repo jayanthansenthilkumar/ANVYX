@@ -1,16 +1,14 @@
 import React from "react";
 import { 
-  Sparkles, 
   Presentation, 
   Terminal, 
-  Database, 
   BrainCircuit, 
   ArrowRight, 
-  CheckCircle2, 
   Calendar, 
   MapPin, 
-  Award,
-  Layers
+  Award, 
+  Layers, 
+  Sparkles 
 } from "lucide-react";
 import { eventDetails } from "../data/eventData";
 
@@ -21,153 +19,203 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenKeynote, onOpenPoster }) => {
   return (
-    <section id="overview" className="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden border-b border-white/10">
-      {/* Background Cyber Glowing Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-cyan-600/20 via-indigo-600/15 to-purple-600/10 blur-[130px] rounded-full pointer-events-none -z-10" />
-      <div className="absolute top-10 right-10 w-72 h-72 bg-cyan-500/10 blur-[90px] rounded-full pointer-events-none -z-10" />
-      <div className="absolute bottom-10 left-10 w-80 h-80 bg-blue-600/10 blur-[100px] rounded-full pointer-events-none -z-10" />
-
-      {/* Cyber Grid Lines overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293708_1px,transparent_1px),linear-gradient(to_bottom,#1f293708_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
-
+    <section id="overview" className="relative pt-10 pb-16 md:pt-16 md:pb-24 brutal-border-b bg-[#F4F2EB] brutal-grid-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center space-y-6">
-          
-          {/* Institution & Partner Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/90 border border-white/10 text-xs text-slate-300 backdrop-blur-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        
+        {/* Top Identification Badge Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-4 brutal-border-b text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="bg-[#111111] text-[#C8FF00] px-2.5 py-0.5 font-bold uppercase">
               {eventDetails.college}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-xs text-cyan-300 font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              IBM Z Explore & AAROH
+            <span className="bg-[#FFFFFF] text-[#111111] px-2.5 py-0.5 brutal-border-thin font-bold">
+              DEPT OF CSBS × AIML
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-950/40 border border-indigo-500/30 text-xs text-indigo-300">
-              Dept of CSBS
+            <span className="bg-[#C8FF00] text-[#111111] px-2.5 py-0.5 brutal-border-thin font-bold hidden sm:inline">
+              IBM Z EXPLORE & AAROH
             </span>
           </div>
 
-          {/* Main Title Badge */}
-          <div className="space-y-3">
-            <div className="inline-block">
-              <h2 className="text-sm sm:text-base font-bold uppercase tracking-widest text-cyan-400">
-                AI Chatbot Workshop & Build Challenge
-              </h2>
+          <div className="flex items-center gap-2 text-[#555555]">
+            <span className="w-2 h-2 bg-[#FF3E00] inline-block animate-ping"></span>
+            <span className="font-bold text-[#111111]">OCT 23, 2026 // KARUR</span>
+          </div>
+        </div>
+
+        {/* Main Brutalist Hero Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
+          
+          {/* Left Column: Big Typography & Manifestos (7 cols) */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="inline-block bg-[#111111] text-[#FFFFFF] text-xs font-mono font-bold px-3 py-1 uppercase tracking-wider">
+              KEYNOTE & WORKSHOP PLATFORM // 1ST-YEAR ENGINEERING
             </div>
-            
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-none">
-              ZENTRA <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">'26</span>
+
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-display font-black tracking-tighter text-[#111111] leading-[0.9]">
+              ZENTRA<br />
+              <span className="bg-[#C8FF00] text-[#111111] px-2 inline-block brutal-border mt-1">
+                ’26
+              </span>
             </h1>
 
-            <div className="pt-2">
-              <p className="text-xl sm:text-2xl md:text-3xl font-extrabold uppercase tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-300 to-amber-200">
+            <div className="p-4 bg-[#FFFFFF] brutal-border brutal-shadow space-y-2 max-w-xl">
+              <span className="text-[11px] font-mono uppercase text-[#555555] font-bold block">
+                // OFFICIAL EVENT CREED
+              </span>
+              <p className="text-2xl sm:text-3xl font-display font-black uppercase text-[#111111] tracking-tight leading-tight">
                 "{eventDetails.tagline}"
               </p>
             </div>
+
+            <p className="text-base sm:text-lg text-[#333333] font-medium leading-relaxed max-w-2xl">
+              The definitive Chief Guest masterclass for 1st-year CSBS engineers. Learn how to architect real conversational chatbots from zero, harness <strong className="text-[#111111] bg-[#C8FF00] px-1">Large Language Models (LLMs)</strong>, eradicate hallucinations with <strong className="text-[#111111] bg-[#FFFFFF] px-1 brutal-border-thin">Retrieval-Augmented Generation (RAG)</strong>, and prepare for the coming of <strong className="text-[#111111] underline decoration-[#0038FF] decoration-2">AGI</strong>.
+            </p>
+
+            {/* Brutalist Call to Actions */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <button
+                onClick={onOpenKeynote}
+                className="brutal-btn brutal-btn-primary px-6 py-4 text-sm sm:text-base flex items-center gap-3"
+              >
+                <Presentation className="w-5 h-5" />
+                <span>LAUNCH KEYNOTE SLIDES</span>
+              </button>
+
+              <a
+                href="#simulator"
+                className="brutal-btn brutal-btn-white px-5 py-4 text-sm sm:text-base flex items-center gap-2.5"
+              >
+                <BrainCircuit className="w-5 h-5 text-[#0038FF]" />
+                <span>TEST RAG SIMULATOR</span>
+              </a>
+
+              <a
+                href="#how-to-build"
+                className="brutal-btn brutal-btn-dark px-4 py-4 text-sm sm:text-base flex items-center gap-2"
+              >
+                <Terminal className="w-5 h-5 text-[#C8FF00]" />
+                <span className="hidden sm:inline">STARTER CODE</span>
+              </a>
+            </div>
           </div>
 
-          {/* Subtitle Tailored for 1st-Year Students & Chief Guest Session */}
-          <p className="max-w-3xl text-slate-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed">
-            The complete keynote masterclass for 1st-year engineers. Learn how to architect real conversational chatbots from scratch, harness <span className="text-cyan-300 font-semibold">LLMs</span>, solve hallucinations with <span className="text-indigo-300 font-semibold">RAG</span>, and navigate the road to <span className="text-purple-300 font-semibold">AGI</span>.
-          </p>
-
-          {/* Quick Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <button
-              onClick={onOpenKeynote}
-              className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm sm:text-base shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 flex items-center gap-3 transition cursor-pointer hover:scale-105 active:scale-95"
-            >
-              <Presentation className="w-5 h-5" />
-              <span>Launch Keynote Slide Deck</span>
-            </button>
-
-            <a
-              href="#simulator"
-              className="px-6 py-3.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-100 font-semibold text-sm sm:text-base border border-cyan-500/30 hover:border-cyan-400 shadow-lg flex items-center gap-2.5 transition cursor-pointer"
-            >
-              <BrainCircuit className="w-5 h-5 text-cyan-400" />
-              <span>Test Live RAG Simulator</span>
-            </a>
-
-            <a
-              href="#how-to-build"
-              className="px-5 py-3.5 rounded-2xl bg-slate-900/60 hover:bg-slate-800 text-slate-300 hover:text-white font-medium text-sm sm:text-base border border-white/10 flex items-center gap-2 transition cursor-pointer"
-            >
-              <Terminal className="w-4 h-4 text-emerald-400" />
-              <span>Starter Code</span>
-            </a>
-          </div>
-
-          {/* Event Quick Intel Bar */}
-          <div className="w-full max-w-4xl mt-8 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
-            <div className="p-4 rounded-2xl bg-slate-900/40 border border-white/5 backdrop-blur-sm">
-              <div className="flex items-center gap-2 text-cyan-400 text-xs font-semibold uppercase">
-                <Calendar className="w-4 h-4" />
-                <span>Date & Time</span>
-              </div>
-              <p className="text-sm font-bold text-white mt-1">{eventDetails.date}</p>
-              <p className="text-xs text-slate-400 font-mono">{eventDetails.time}</p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-slate-900/40 border border-white/5 backdrop-blur-sm">
-              <div className="flex items-center gap-2 text-indigo-400 text-xs font-semibold uppercase">
-                <MapPin className="w-4 h-4" />
-                <span>Venue</span>
-              </div>
-              <p className="text-sm font-bold text-white mt-1">{eventDetails.venue}</p>
-              <p className="text-xs text-slate-400">MKCE Campus, Karur</p>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-slate-900/40 border border-white/5 backdrop-blur-sm">
-              <div className="flex items-center gap-2 text-purple-400 text-xs font-semibold uppercase">
-                <Layers className="w-4 h-4" />
-                <span>Event Format</span>
-              </div>
-              <p className="text-sm font-bold text-white mt-1">Workshop + Challenge</p>
-              <p className="text-xs text-slate-400">Hands-on Team Hackathon</p>
-            </div>
-
+          {/* Right Column: Event Info Poster & Resource Persons (5 cols) */}
+          <div className="lg:col-span-5 space-y-4">
+            
+            {/* Poster Preview Panel */}
             <div 
               onClick={onOpenPoster}
-              className="p-4 rounded-2xl bg-cyan-950/30 border border-cyan-500/20 hover:border-cyan-400/50 backdrop-blur-sm transition cursor-pointer group"
+              className="bg-[#FFFFFF] brutal-border brutal-shadow-lg p-3 group cursor-pointer hover:translate-x-[-2px] hover:translate-y-[-2px] transition"
             >
-              <div className="flex items-center justify-between text-cyan-300 text-xs font-semibold uppercase">
-                <span className="flex items-center gap-1.5">
-                  <Award className="w-4 h-4 text-amber-400" />
-                  Official Poster
+              <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#000000] text-xs font-mono">
+                <span className="font-bold flex items-center gap-1.5">
+                  <Award className="w-4 h-4 text-[#FF3E00]" />
+                  OFFICIAL EVENT POSTER
                 </span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition text-cyan-400" />
+                <span className="text-[#0038FF] font-bold group-hover:underline flex items-center gap-1">
+                  VIEW FULL <ArrowRight className="w-3.5 h-3.5" />
+                </span>
               </div>
-              <p className="text-sm font-bold text-white mt-1">View ZENTRA '26</p>
-              <p className="text-xs text-cyan-400/80">Click to view full flyer</p>
-            </div>
-          </div>
-
-          {/* Speakers / Resource Persons Intro */}
-          <div className="w-full max-w-4xl p-5 rounded-2xl bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-slate-900/90 border border-white/10 text-left flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
-                <Award className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="text-xs font-mono uppercase tracking-wider text-slate-400">Distinguished Resource Persons</span>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-semibold text-white mt-0.5">
-                  <span className="text-cyan-300">{eventDetails.resourcePersons[0].name} (System Engineer, TCS)</span>
-                  <span className="text-slate-500">•</span>
-                  <span className="text-indigo-300">{eventDetails.resourcePersons[1].name} (Associate Engineer, CTS)</span>
+              
+              <div className="relative aspect-[4/3] bg-[#E8E5DC] brutal-border-thin overflow-hidden flex items-center justify-center">
+                <img 
+                  src="/poster.png" 
+                  alt="ZENTRA '26 Poster - MKCE Dept of CSBS"
+                  className="w-full h-full object-cover object-top" 
+                />
+                <div className="absolute inset-0 bg-[#000000]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="bg-[#111111] text-[#C8FF00] font-mono text-xs font-bold px-3 py-1.5 brutal-border">
+                    CLICK TO ENLARGE
+                  </span>
                 </div>
               </div>
             </div>
-            <button
-              onClick={onOpenPoster}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 border border-white/10 transition cursor-pointer shrink-0"
-            >
-              View Speaker Bio & Itinerary
-            </button>
+
+            {/* Resource Persons Card */}
+            <div className="bg-[#FFFFFF] brutal-border brutal-shadow p-5 space-y-3">
+              <div className="flex items-center justify-between text-xs font-mono font-bold text-[#555555] border-b border-[#000000] pb-2">
+                <span>DISTINGUISHED RESOURCE PERSONS</span>
+                <span className="bg-[#C8FF00] text-[#111111] px-1.5 py-0.5">ALUMNI AIML</span>
+              </div>
+
+              <div className="space-y-3">
+                <div className="p-2.5 bg-[#F4F2EB] brutal-border-thin flex items-center justify-between">
+                  <div>
+                    <h4 className="font-display font-bold text-sm text-[#111111]">
+                      {eventDetails.resourcePersons[0].name}
+                    </h4>
+                    <p className="text-xs font-mono text-[#555555]">
+                      {eventDetails.resourcePersons[0].role} at {eventDetails.resourcePersons[0].company}
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold bg-[#111111] text-[#FFFFFF] px-1.5 py-0.5">
+                    TCS
+                  </span>
+                </div>
+
+                <div className="p-2.5 bg-[#F4F2EB] brutal-border-thin flex items-center justify-between">
+                  <div>
+                    <h4 className="font-display font-bold text-sm text-[#111111]">
+                      {eventDetails.resourcePersons[1].name}
+                    </h4>
+                    <p className="text-xs font-mono text-[#555555]">
+                      {eventDetails.resourcePersons[1].role} at {eventDetails.resourcePersons[1].company}
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold bg-[#0038FF] text-[#FFFFFF] px-1.5 py-0.5">
+                    CTS
+                  </span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
+
+        {/* 4 Brutalist Key Metric / Logistical Panels */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+          <div className="bg-[#FFFFFF] p-4 brutal-border brutal-shadow-sm space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#555555] uppercase">
+              <Calendar className="w-3.5 h-3.5 text-[#111111]" />
+              DATE
+            </div>
+            <p className="font-display font-bold text-base text-[#111111]">{eventDetails.date}</p>
+            <p className="text-[11px] font-mono text-[#555555]">{eventDetails.time}</p>
+          </div>
+
+          <div className="bg-[#FFFFFF] p-4 brutal-border brutal-shadow-sm space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#555555] uppercase">
+              <MapPin className="w-3.5 h-3.5 text-[#0038FF]" />
+              VENUE
+            </div>
+            <p className="font-display font-bold text-base text-[#111111]">{eventDetails.venue}</p>
+            <p className="text-[11px] font-mono text-[#555555]">MKCE Campus, Karur</p>
+          </div>
+
+          <div className="bg-[#FFFFFF] p-4 brutal-border brutal-shadow-sm space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#555555] uppercase">
+              <Layers className="w-3.5 h-3.5 text-[#FF3E00]" />
+              FORMAT
+            </div>
+            <p className="font-display font-bold text-base text-[#111111]">Keynote + Hackathon</p>
+            <p className="text-[11px] font-mono text-[#555555]">Hands-On Build Challenge</p>
+          </div>
+
+          <div className="bg-[#C8FF00] p-4 brutal-border brutal-shadow-sm space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#111111] uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-[#111111]" />
+              COORDINATOR
+            </div>
+            <p className="font-display font-bold text-base text-[#111111]">
+              {eventDetails.studentCoordinator.name}
+            </p>
+            <p className="text-[11px] font-mono text-[#111111] font-bold">
+              {eventDetails.studentCoordinator.phone}
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
   );

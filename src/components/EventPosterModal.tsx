@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import { 
   X, 
-  Download, 
-  Calendar, 
-  Clock, 
-  MapPin, 
   Award, 
   Phone, 
-  Globe, 
-  ExternalLink,
-  Users,
-  CheckCircle2
+  ExternalLink
 } from "lucide-react";
 import { eventDetails, scheduleTimeline } from "../data/eventData";
 
@@ -25,130 +18,128 @@ export const EventPosterModal: React.FC<EventPosterModalProps> = ({ isOpen, onCl
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-      <div className="w-full max-w-4xl bg-slate-950 border border-white/15 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in zoom-in-95">
+    <div className="fixed inset-0 z-50 bg-[#111111]/85 backdrop-blur-none flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div className="w-full max-w-4xl bg-[#FFFFFF] brutal-border brutal-shadow-xl overflow-hidden flex flex-col max-h-[92vh] animate-in zoom-in-95">
         
         {/* Modal Header */}
-        <div className="px-6 py-4 bg-slate-900 border-b border-white/10 flex items-center justify-between">
+        <div className="px-6 py-4 bg-[#111111] text-[#FFFFFF] brutal-border-b flex items-center justify-between font-mono text-xs">
           <div className="flex items-center gap-3">
-            <span className="p-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-              <Award className="w-5 h-5" />
+            <span className="p-1.5 bg-[#C8FF00] text-[#111111] brutal-border flex items-center justify-center">
+              <Award className="w-4 h-4" />
             </span>
             <div>
-              <h3 className="font-bold text-white text-base">ZENTRA '26 Event Dossier</h3>
-              <p className="text-xs text-slate-400 font-mono">Department of CSBS & AIML • MKCE</p>
+              <h3 className="font-bold text-base text-[#FFFFFF]">ZENTRA '26 EVENT DOSSIER</h3>
+              <p className="text-[10px] text-[#888888]">DEPT OF CSBS × AIML // M. KUMARASAMY COLLEGE OF ENGINEERING</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onClose}
-              className="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+          <button
+            onClick={onClose}
+            className="p-1.5 brutal-border bg-[#FFFFFF] text-[#111111] hover:bg-[#FF3E00] hover:text-[#FFFFFF] transition cursor-pointer"
+          >
+            <X className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Tab Controls */}
-        <div className="px-6 py-2.5 bg-slate-900/40 border-b border-white/5 flex gap-2">
+        <div className="px-6 py-2.5 bg-[#F4F2EB] brutal-border-b flex gap-1 font-mono text-xs">
           <button
             onClick={() => setActiveTab("poster")}
-            className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
+            className={`px-3 py-1 font-bold brutal-border transition cursor-pointer ${
               activeTab === "poster"
-                ? "bg-cyan-500 text-slate-950 font-bold"
-                : "text-slate-400 hover:text-white"
+                ? "bg-[#111111] text-[#C8FF00]"
+                : "bg-[#FFFFFF] text-[#111111] hover:bg-[#E8E5DC]"
             }`}
           >
-            Official Poster
+            OFFICIAL FLYER
           </button>
           <button
             onClick={() => setActiveTab("speakers")}
-            className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
+            className={`px-3 py-1 font-bold brutal-border transition cursor-pointer ${
               activeTab === "speakers"
-                ? "bg-cyan-500 text-slate-950 font-bold"
-                : "text-slate-400 hover:text-white"
+                ? "bg-[#111111] text-[#C8FF00]"
+                : "bg-[#FFFFFF] text-[#111111] hover:bg-[#E8E5DC]"
             }`}
           >
-            Resource Persons
+            RESOURCE PERSONS
           </button>
           <button
             onClick={() => setActiveTab("schedule")}
-            className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
+            className={`px-3 py-1 font-bold brutal-border transition cursor-pointer ${
               activeTab === "schedule"
-                ? "bg-cyan-500 text-slate-950 font-bold"
-                : "text-slate-400 hover:text-white"
+                ? "bg-[#111111] text-[#C8FF00]"
+                : "bg-[#FFFFFF] text-[#111111] hover:bg-[#E8E5DC]"
             }`}
           >
-            Full Day Schedule
+            FULL SCHEDULE
           </button>
         </div>
 
         {/* Modal Body */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-[#F4F2EB]">
           {activeTab === "poster" && (
             <div className="space-y-4 flex flex-col items-center">
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-lg bg-slate-900">
+              <div className="relative brutal-border brutal-shadow-lg max-w-lg bg-[#FFFFFF] p-2">
                 <img 
                   src="/poster.png" 
                   alt="ZENTRA '26 Official Poster - M. Kumarasamy College of Engineering" 
-                  className="w-full h-auto object-contain"
-                  onError={(e) => {
-                    // Fallback to absolute or placeholder if needed
-                    (e.target as HTMLElement).style.display = "none";
-                  }}
+                  className="w-full h-auto object-contain brutal-border-thin"
                 />
               </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs text-slate-400 font-mono">
-                <span>Sir C V Raman Hall</span>
-                <span>•</span>
-                <span>23rd October 2026</span>
-                <span>•</span>
-                <span>9.00 AM - 4.30 PM</span>
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-1 text-xs font-mono font-bold text-[#111111]">
+                <span className="bg-[#FFFFFF] px-2 py-0.5 brutal-border-thin">SIR C V RAMAN HALL</span>
+                <span>//</span>
+                <span className="bg-[#FFFFFF] px-2 py-0.5 brutal-border-thin">23RD OCTOBER 2026</span>
+                <span>//</span>
+                <span className="bg-[#C8FF00] px-2 py-0.5 brutal-border-thin">9.00 AM - 4.30 PM</span>
               </div>
             </div>
           )}
 
           {activeTab === "speakers" && (
             <div className="space-y-6">
-              <div className="text-center max-w-lg mx-auto">
-                <span className="text-xs font-mono uppercase text-cyan-400">Distinguished Alumni & Engineers</span>
-                <h4 className="text-xl font-black text-white mt-1">Resource Persons</h4>
-                <p className="text-xs text-slate-400 mt-1">
-                  Guiding 1st-year students from theory to production chatbots.
+              <div className="max-w-lg">
+                <span className="text-xs font-mono font-bold uppercase text-[#555555]">
+                  // ALUMNI INDUSTRY SPEAKERS
+                </span>
+                <h4 className="font-display font-black text-2xl text-[#111111] mt-0.5">
+                  RESOURCE PERSONS
+                </h4>
+                <p className="text-xs font-mono text-[#555555]">
+                  Guiding 1st-year students from foundational theory to working chatbots.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {eventDetails.resourcePersons.map((speaker, idx) => (
-                  <div key={idx} className="p-6 rounded-2xl bg-slate-900/90 border border-cyan-500/30 space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-bold text-lg">
+                  <div key={idx} className="p-5 brutal-card bg-[#FFFFFF] space-y-3">
+                    <div className="flex items-center gap-3 pb-3 border-b border-[#000000]">
+                      <div className="w-10 h-10 bg-[#111111] text-[#C8FF00] brutal-border flex items-center justify-center font-display font-black text-lg">
                         {speaker.name[0]}
                       </div>
                       <div>
-                        <h5 className="font-bold text-white text-base">{speaker.name}</h5>
-                        <p className="text-xs text-cyan-300 font-medium">{speaker.role} at {speaker.company}</p>
+                        <h5 className="font-display font-black text-base text-[#111111]">{speaker.name}</h5>
+                        <p className="text-xs font-mono text-[#0038FF] font-bold">{speaker.role} at {speaker.company}</p>
                       </div>
                     </div>
-                    <div className="pt-2 border-t border-white/5 space-y-1 text-xs text-slate-300">
-                      <p><span className="text-slate-500">Department:</span> {speaker.department}</p>
-                      <p><span className="text-slate-500">Alumni Batch:</span> {speaker.batch}</p>
+                    <div className="space-y-1 text-xs font-mono text-[#444444]">
+                      <p><span className="font-bold text-[#111111]">DEPT:</span> {speaker.department}</p>
+                      <p><span className="font-bold text-[#111111]">BATCH:</span> {speaker.batch}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* Student Coordinator */}
-              <div className="p-4 rounded-2xl bg-slate-900/60 border border-white/10 flex items-center justify-between text-xs">
+              <div className="p-4 bg-[#FFFFFF] brutal-border flex items-center justify-between text-xs font-mono">
                 <div>
-                  <span className="text-slate-400 uppercase font-mono text-[10px] block">Student Coordinator:</span>
-                  <span className="text-white font-bold text-sm">{eventDetails.studentCoordinator.name}</span>
+                  <span className="text-[#555555] uppercase font-bold block text-[10px]">STUDENT COORDINATOR:</span>
+                  <span className="text-[#111111] font-display font-black text-base">{eventDetails.studentCoordinator.name}</span>
                 </div>
                 <a 
                   href={`tel:${eventDetails.studentCoordinator.phone}`}
-                  className="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono flex items-center gap-1.5"
+                  className="px-3 py-1.5 bg-[#C8FF00] text-[#111111] brutal-border-thin font-bold flex items-center gap-1.5"
                 >
                   <Phone className="w-3.5 h-3.5" />
                   {eventDetails.studentCoordinator.phone}
@@ -159,21 +150,26 @@ export const EventPosterModal: React.FC<EventPosterModalProps> = ({ isOpen, onCl
 
           {activeTab === "schedule" && (
             <div className="space-y-4">
-              <div className="text-center max-w-lg mx-auto mb-4">
-                <h4 className="text-lg font-bold text-white">Event Itinerary & Timeline</h4>
-                <p className="text-xs text-slate-400">23rd October 2026 • Sir C V Raman Hall</p>
+              <div className="max-w-lg mb-2">
+                <span className="text-xs font-mono font-bold uppercase text-[#555555]">
+                  // EVENT ITINERARY
+                </span>
+                <h4 className="font-display font-black text-2xl text-[#111111] mt-0.5">
+                  TIMELINE SCHEDULE
+                </h4>
+                <p className="text-xs font-mono text-[#555555]">23rd October 2026 // Sir C V Raman Hall</p>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {scheduleTimeline.map((item, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-slate-900/80 border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
-                    <div className="space-y-1">
-                      <span className="font-mono text-cyan-400 font-semibold">{item.time}</span>
-                      <h5 className="text-sm font-bold text-white">{item.title}</h5>
-                      <p className="text-slate-400">{item.desc}</p>
+                  <div key={idx} className="p-3.5 bg-[#FFFFFF] brutal-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono">
+                    <div className="space-y-0.5">
+                      <span className="bg-[#111111] text-[#C8FF00] px-1.5 py-0.2 font-bold">{item.time}</span>
+                      <h5 className="font-display font-bold text-sm text-[#111111]">{item.title}</h5>
+                      <p className="text-[#555555] font-sans font-medium">{item.desc}</p>
                     </div>
-                    <span className="w-5 h-5 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center font-mono text-[11px] shrink-0">
-                      {idx + 1}
+                    <span className="w-6 h-6 bg-[#F4F2EB] brutal-border-thin text-[#111111] font-bold flex items-center justify-center shrink-0">
+                      0{idx + 1}
                     </span>
                   </div>
                 ))}
@@ -183,15 +179,15 @@ export const EventPosterModal: React.FC<EventPosterModalProps> = ({ isOpen, onCl
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-4 bg-slate-900 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+        <div className="px-6 py-3 bg-[#FFFFFF] brutal-border-t flex items-center justify-between text-xs font-mono text-[#555555]">
           <div className="flex items-center gap-2">
             <span>{eventDetails.college}</span>
-            <span>•</span>
+            <span>//</span>
             <a 
               href={`https://${eventDetails.website}`} 
               target="_blank" 
               rel="noreferrer" 
-              className="text-cyan-400 hover:underline flex items-center gap-1"
+              className="text-[#0038FF] hover:underline flex items-center gap-1 font-bold"
             >
               {eventDetails.website}
               <ExternalLink className="w-3 h-3" />
@@ -199,9 +195,9 @@ export const EventPosterModal: React.FC<EventPosterModalProps> = ({ isOpen, onCl
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium cursor-pointer"
+            className="brutal-btn brutal-btn-dark px-4 py-1.5 text-xs font-mono"
           >
-            Close
+            CLOSE
           </button>
         </div>
 

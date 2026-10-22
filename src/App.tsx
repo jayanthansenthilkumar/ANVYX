@@ -25,12 +25,12 @@ export function App() {
     const handleScroll = () => {
       const sections = [
         "overview",
+        "simulator",
         "how-to-build",
         "rag-concept",
         "llm-concept",
         "agi-concept",
         "use-cases",
-        "simulator",
         "quiz",
         "roadmap"
       ];
@@ -54,8 +54,8 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-slate-950">
-      {/* Top Sticky Navbar */}
+    <div className="min-h-screen bg-[#F4F2EB] text-[#111111] flex flex-col font-sans selection:bg-[#C8FF00] selection:text-[#000000]">
+      {/* Top Sticky Brutalist Navbar */}
       <Navbar
         onOpenKeynote={() => setIsKeynoteOpen(true)}
         onOpenSpeechNotes={() => setIsSpeechNotesOpen(true)}
@@ -65,53 +65,53 @@ export function App() {
 
       {/* Main Content Sections */}
       <main className="flex-1">
-        {/* 1. Electrifying Hero Section */}
+        {/* 1. Hero Section */}
         <HeroSection
           onOpenKeynote={() => setIsKeynoteOpen(true)}
           onOpenPoster={() => setIsPosterOpen(true)}
         />
 
-        {/* 2. Interactive Live Chatbot & RAG Simulator */}
+        {/* 2. Interactive Console: Chatbot & RAG Simulator */}
         <ChatbotSimulator />
 
-        {/* 3. Step-by-Step Blueprint: How to Build a Chatbot + Starter Code */}
+        {/* 3. System Architecture & Starter Code */}
         <HowToBuildSection />
 
-        {/* 4. RAG Demystified (Open-Book Exam, 5-Stage Pipeline, Embedding Math) */}
+        {/* 4. RAG Demystified (Open-Book Exam, Pipeline, Cosine Distance) */}
         <RagExplainer />
 
-        {/* 5. What is an LLM? (The Giant Autocomplete, Next-Token Playground, Parameters) */}
+        {/* 5. What is an LLM? (Next-Token Prediction Meter, Parameters) */}
         <LlmExplainer />
 
-        {/* 6. The Road to AGI (ANI vs AGI vs ASI, 1st-Year Mythbusters) */}
+        {/* 6. The Road to AGI (ANI, AGI, ASI, Mythbusters) */}
         <AgiExplainer />
 
-        {/* 7. CSBS Use Cases (Fintech, EdTech, Healthcare, Enterprise ERP, DevOps) */}
+        {/* 7. CSBS Enterprise Use Cases */}
         <UseCasesSection />
 
-        {/* 8. Interactive 1st-Year Knowledge Quiz with Confetti */}
+        {/* 8. 1st-Year AI Masterclass Quiz */}
         <QuizSection />
 
-        {/* 9. 4-Year AI Engineer Roadmap */}
+        {/* 9. 4-Year Career Trajectory Roadmap */}
         <RoadmapSection />
       </main>
 
       {/* Footer */}
       <Footer />
 
-      {/* Modal 1: Fullscreen Keynote Presentation for Sir C V Raman Hall Projector */}
+      {/* Modal 1: Keynote Presentation Slides */}
       <KeynoteModal
         isOpen={isKeynoteOpen}
         onClose={() => setIsKeynoteOpen(false)}
       />
 
-      {/* Modal 2: Chief Guest Speech Notes & Q&A Drawer */}
+      {/* Modal 2: Chief Guest Speech Notes & Stage Script */}
       <SpeechNotesDrawer
         isOpen={isSpeechNotesOpen}
         onClose={() => setIsSpeechNotesOpen(false)}
       />
 
-      {/* Modal 3: Official Event Poster & Schedule Dossier */}
+      {/* Modal 3: Event Dossier & Official Poster */}
       <EventPosterModal
         isOpen={isPosterOpen}
         onClose={() => setIsPosterOpen(false)}

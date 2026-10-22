@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { 
-  Terminal, 
   Layers, 
   Copy, 
   Check, 
-  Sparkles, 
   Cpu, 
   Database, 
   Globe, 
-  Wrench, 
-  ArrowRight,
-  BookOpen
+  Wrench
 } from "lucide-react";
 import { starterCodeSnippets } from "../data/codeSnippetsData";
 
@@ -30,146 +26,157 @@ export const HowToBuildSection: React.FC = () => {
   const layers = [
     {
       num: 1,
-      name: "Interface (UI)",
+      name: "INTERFACE (UI)",
       role: "The Face & Ears",
       tech: "React 19 / Gradio / Streamlit / WhatsApp",
-      desc: "Where the user types messages or speaks voice notes. Handles streaming tokens and auto-scrolling chat bubbles.",
-      icon: <Globe className="w-5 h-5 text-cyan-400" />
+      desc: "Where the user interacts. Handles token streaming, auto-scrolling conversation bubbles, and accessible responsive controls.",
+      icon: <Globe className="w-5 h-5 text-[#111111]" />
     },
     {
       num: 2,
-      name: "Orchestrator (Backend)",
-      role: "The Central Nervous System",
+      name: "ORCHESTRATOR",
+      role: "Central Nervous System",
       tech: "FastAPI / Python / LangChain / LlamaIndex",
-      desc: "Manages conversation history, session memory, rate limits, authentication, and connects the user prompt to the database.",
-      icon: <Layers className="w-5 h-5 text-indigo-400" />
+      desc: "Manages session state, conversation history buffers, token budgeting, and coordinates search queries with database vaults.",
+      icon: <Layers className="w-5 h-5 text-[#0038FF]" />
     },
     {
       num: 3,
-      name: "Vector Memory (RAG)",
-      role: "The Long-Term Knowledge Vault",
+      name: "VECTOR VAULT (RAG)",
+      role: "Long-Term Knowledge Memory",
       tech: "ChromaDB / FAISS / Pinecone / pgvector",
-      desc: "Stores company PDFs, college syllabus, and private docs as high-dimensional semantic coordinates. Prevents hallucinations.",
-      icon: <Database className="w-5 h-5 text-emerald-400" />
+      desc: "Stores documents, circulars, and handbooks as numerical coordinates in high-dimensional semantic space. Completely stops hallucinations.",
+      icon: <Database className="w-5 h-5 text-[#111111]" />
     },
     {
       num: 4,
-      name: "LLM Engine",
-      role: "The Reasoning Brain",
-      tech: "Ollama (Llama 3) / Claude / OpenAI / Gemini",
-      desc: "Consumes the prompt + retrieved context and synthesizes a fluent, natural language answer.",
-      icon: <Cpu className="w-5 h-5 text-pink-400" />
+      name: "LLM ENGINE",
+      role: "The Reasoning Core",
+      tech: "Ollama (Llama 3.2) / Claude / OpenAI / Gemini",
+      desc: "Takes user input + retrieved context and calculates probability distributions to generate accurate, natural language answers.",
+      icon: <Cpu className="w-5 h-5 text-[#FF3E00]" />
     },
     {
       num: 5,
-      name: "Tool Calling & Actions",
-      role: "The Hands & Feet",
-      tech: "REST APIs / SQL Queries / Email Dispatcher",
-      desc: "Allows the chatbot to take real-world actions: booking a campus bus ticket, generating a fee receipt, or sending a slack message.",
-      icon: <Wrench className="w-5 h-5 text-amber-400" />
+      name: "TOOL EXECUTION",
+      role: "Hands & Action Layer",
+      tech: "REST APIs / SQL / College ERP / SMTP",
+      desc: "Empowers the bot to take real-world actions: retrieving attendance records, booking lab equipment, or sending notifications.",
+      icon: <Wrench className="w-5 h-5 text-[#111111]" />
     }
   ];
 
   return (
-    <section id="how-to-build" className="py-20 md:py-28 relative border-b border-white/10">
+    <section id="how-to-build" className="py-16 md:py-24 brutal-border-b bg-[#F4F2EB]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono text-xs uppercase tracking-wider">
-            <Terminal className="w-3.5 h-3.5" />
-            Engineering Blueprint
+        <div className="max-w-3xl mb-12 space-y-2">
+          <div className="inline-block bg-[#111111] text-[#C8FF00] font-mono text-xs font-bold px-2 py-0.5 uppercase tracking-wider">
+            [02] // SYSTEM_ARCHITECTURE
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
-            How to Build an <span className="text-cyan-400">AI Chatbot</span>
+          <h2 className="text-3xl sm:text-5xl font-display font-black tracking-tight text-[#111111]">
+            HOW TO BUILD AN <span className="bg-[#FFFFFF] px-2 brutal-border-thin">AI CHATBOT</span>
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg">
-            A production chatbot isn't just a single API call. Master the 5-layer anatomy, then grab ready-to-run starter code for your afternoon build challenge!
+          <p className="text-sm sm:text-base text-[#555555] font-medium">
+            A production chatbot is an orchestrated 5-layer engineering stack. Inspect each architectural tier below and copy the starter code for your build challenge.
           </p>
         </div>
 
-        {/* 5-Layer Interactive Architecture Diagram */}
-        <div className="mb-16">
-          <div className="text-center mb-6">
-            <span className="text-xs uppercase font-mono text-cyan-400 tracking-wider">
-              Interactive Architecture Map • Click Any Layer to Inspect
-            </span>
+        {/* 5-Layer Stack Grid */}
+        <div className="mb-14">
+          <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#555555] mb-3">
+            // SELECT AN ARCHITECTURAL LAYER TO INSPECT:
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-3 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
             {layers.map((layer, idx) => (
               <div
                 key={layer.num}
                 onClick={() => setSelectedLayer(idx)}
-                className={`p-5 rounded-2xl border transition-all cursor-pointer relative flex flex-col justify-between ${
+                className={`p-4 brutal-border transition cursor-pointer flex flex-col justify-between ${
                   selectedLayer === idx
-                    ? "bg-slate-900 border-cyan-400 shadow-xl shadow-cyan-500/20 scale-102"
-                    : "bg-slate-950/70 border-white/10 hover:border-white/20 hover:bg-slate-900/60"
+                    ? "bg-[#111111] text-[#FFFFFF] brutal-shadow-lg translate-x-[-2px] translate-y-[-2px]"
+                    : "bg-[#FFFFFF] text-[#111111] brutal-shadow-sm hover:bg-[#E8E5DC]"
                 }`}
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="w-6 h-6 rounded-full bg-slate-800 text-slate-300 text-xs font-mono font-bold flex items-center justify-center border border-white/10">
+                    <span className={`text-xs font-mono font-bold px-1.5 py-0.5 brutal-border-thin ${
+                      selectedLayer === idx ? "bg-[#C8FF00] text-[#111111]" : "bg-[#F4F2EB] text-[#111111]"
+                    }`}>
                       L{layer.num}
                     </span>
-                    {layer.icon}
+                    <div className={selectedLayer === idx ? "text-[#C8FF00]" : ""}>
+                      {layer.icon}
+                    </div>
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-white leading-tight">{layer.name}</h4>
-                    <span className="text-[11px] text-cyan-300 font-medium block mt-0.5">{layer.role}</span>
+                    <h4 className="font-display font-bold text-sm tracking-tight">{layer.name}</h4>
+                    <span className={`text-[11px] font-mono block mt-0.5 ${
+                      selectedLayer === idx ? "text-[#C8FF00]" : "text-[#555555]"
+                    }`}>
+                      {layer.role}
+                    </span>
                   </div>
                 </div>
-                <div className="pt-3 border-t border-white/5 mt-3">
-                  <span className="text-[10px] font-mono text-slate-400 block truncate">{layer.tech}</span>
+
+                <div className="pt-3 border-t border-current/20 mt-3 text-[10px] font-mono truncate">
+                  {layer.tech}
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Detailed Inspector Box for Selected Layer */}
-          <div className="max-w-4xl mx-auto mt-6 p-6 rounded-2xl bg-slate-900/90 border border-cyan-500/30 backdrop-blur-xl flex flex-col sm:flex-row items-start gap-4">
-            <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 shrink-0 border border-cyan-500/30">
+          {/* Detailed Inspector Box */}
+          <div className="mt-4 p-5 bg-[#FFFFFF] brutal-border brutal-shadow flex flex-col sm:flex-row items-start gap-4">
+            <div className="w-12 h-12 bg-[#C8FF00] brutal-border flex items-center justify-center font-bold shrink-0">
               {layers[selectedLayer].icon}
             </div>
-            <div className="space-y-1.5 flex-1">
+            <div className="space-y-2 flex-1">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono uppercase bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30 font-bold">
-                  Layer {layers[selectedLayer].num}: {layers[selectedLayer].name}
+                <span className="font-mono text-xs font-bold bg-[#111111] text-[#FFFFFF] px-2 py-0.5">
+                  LAYER {layers[selectedLayer].num}: {layers[selectedLayer].name}
                 </span>
-                <span className="text-xs text-slate-400 font-medium">Role: {layers[selectedLayer].role}</span>
+                <span className="text-xs font-mono font-bold text-[#555555]">
+                  // {layers[selectedLayer].role}
+                </span>
               </div>
-              <p className="text-slate-200 text-sm md:text-base leading-relaxed pt-1">
+              <p className="text-sm text-[#222222] font-medium leading-relaxed">
                 {layers[selectedLayer].desc}
               </p>
-              <div className="pt-2 flex items-center gap-2 text-xs font-mono text-cyan-300">
-                <span className="text-slate-400">Recommended Tech Stack:</span>
-                <span className="bg-slate-800 px-2 py-0.5 rounded text-white">{layers[selectedLayer].tech}</span>
+              <div className="text-xs font-mono pt-1 text-[#111111]">
+                <strong className="text-[#0038FF]">TECH STACK SPECIFICATION:</strong>{" "}
+                <span className="bg-[#E8E5DC] px-2 py-0.5 brutal-border-thin font-bold">
+                  {layers[selectedLayer].tech}
+                </span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Code Snippets & Build Challenge Templates */}
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <Terminal className="w-5 h-5 text-cyan-400" />
-                Chatbot Build Challenge Starter Code
+              <div className="inline-block bg-[#0038FF] text-[#FFFFFF] font-mono text-[10px] font-bold px-2 py-0.5 uppercase mb-1">
+                AFTERNOON BUILD CHALLENGE
+              </div>
+              <h3 className="font-display font-black text-xl sm:text-2xl text-[#111111]">
+                STARTER CODE TEMPLATES
               </h3>
-              <p className="text-xs text-slate-400">Tested and ready to copy-paste for the afternoon hackathon.</p>
             </div>
 
-            {/* Code Selector Tabs */}
-            <div className="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-white/10">
+            {/* Snippet Tabs */}
+            <div className="flex flex-wrap gap-1">
               {starterCodeSnippets.map((snippet) => (
                 <button
                   key={snippet.id}
                   onClick={() => setActiveSnippetId(snippet.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer ${
+                  className={`px-3 py-1.5 text-xs font-mono font-bold brutal-border transition cursor-pointer ${
                     activeSnippetId === snippet.id
-                      ? "bg-cyan-500 text-slate-950 font-bold shadow-md"
-                      : "text-slate-300 hover:text-white hover:bg-white/5"
+                      ? "bg-[#111111] text-[#C8FF00] brutal-shadow-sm"
+                      : "bg-[#FFFFFF] text-[#111111] hover:bg-[#E8E5DC]"
                   }`}
                 >
                   {snippet.filename}
@@ -178,60 +185,54 @@ export const HowToBuildSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Active Snippet Card */}
-          <div className="rounded-3xl border border-white/15 bg-slate-950 overflow-hidden shadow-2xl">
-            {/* Header bar of Code Box */}
-            <div className="px-5 py-3.5 bg-slate-900 border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+          {/* Active Snippet Terminal Block */}
+          <div className="brutal-card brutal-shadow-lg overflow-hidden bg-[#111111] text-[#FFFFFF]">
+            {/* Header bar */}
+            <div className="px-4 py-3 bg-[#1B1B1B] brutal-border-b flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
               <div className="flex items-center gap-3">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-                </div>
-                <span className="font-mono text-xs font-semibold text-cyan-300">
-                  {activeSnippet.filename}
-                </span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
-                  {activeSnippet.difficulty} • ~{activeSnippet.estimatedTime}
+                <span className="w-2.5 h-2.5 bg-[#C8FF00] inline-block"></span>
+                <span className="text-[#C8FF00] font-bold">{activeSnippet.filename}</span>
+                <span className="text-[#888888] hidden sm:inline">
+                  [{activeSnippet.difficulty} // ~{activeSnippet.estimatedTime}]
                 </span>
               </div>
 
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition cursor-pointer border border-white/10"
+                className="brutal-btn brutal-btn-primary px-3 py-1 text-xs font-mono flex items-center gap-1.5"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copied ? "Copied Code!" : "Copy Code"}</span>
+                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                <span>{copied ? "COPIED!" : "COPY_CODE"}</span>
               </button>
             </div>
 
-            {/* Prerequisites Banner */}
-            <div className="px-5 py-2.5 bg-cyan-950/20 border-b border-cyan-500/20 text-xs text-cyan-300 flex flex-wrap items-center gap-x-4 gap-y-1">
-              <span className="font-bold uppercase tracking-wider text-[10px] text-cyan-400">Prerequisites:</span>
+            {/* Prerequisites */}
+            <div className="px-4 py-2 bg-[#161616] border-b border-[#333333] text-xs font-mono flex flex-wrap items-center gap-2">
+              <span className="text-[#C8FF00] font-bold">SETUP:</span>
               {activeSnippet.prerequisites.map((p, idx) => (
-                <span key={idx} className="font-mono text-[11px] bg-slate-900/80 px-2 py-0.5 rounded border border-white/5 text-slate-300">
+                <span key={idx} className="bg-[#242424] text-[#E0E0E0] px-2 py-0.5 border border-[#3A3A3A] text-[11px]">
                   {p}
                 </span>
               ))}
             </div>
 
-            {/* Code Block */}
-            <div className="p-4 sm:p-6 overflow-x-auto max-h-[420px] font-mono text-xs sm:text-sm text-slate-200 leading-relaxed bg-slate-950/90">
+            {/* Code */}
+            <div className="p-4 sm:p-6 overflow-x-auto max-h-[420px] font-mono text-xs sm:text-sm text-[#F4F2EB] leading-relaxed select-text bg-[#0D0D0D]">
               <pre>
                 <code>{activeSnippet.code}</code>
               </pre>
             </div>
 
-            {/* Code Line Breakdown Guide */}
-            <div className="p-5 bg-slate-900/60 border-t border-white/10 space-y-2">
-              <span className="text-xs uppercase font-bold tracking-wider text-slate-400 block mb-2">
-                📖 1st-Year Code Walkthrough:
+            {/* Line walkthrough guide */}
+            <div className="p-4 bg-[#1B1B1B] brutal-border-t">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#C8FF00] block mb-2">
+                // 1ST-YEAR ARCHITECTURAL CODE BREAKDOWN:
               </span>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs font-mono">
                 {activeSnippet.explanationSteps.map((step, idx) => (
-                  <div key={idx} className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5 text-xs space-y-1">
-                    <span className="font-mono text-cyan-400 font-bold">{step.lineRange}</span>
-                    <p className="text-slate-300">{step.description}</p>
+                  <div key={idx} className="p-2 bg-[#111111] border border-[#333333] space-y-0.5">
+                    <span className="text-[#C8FF00] font-bold">{step.lineRange}:</span>
+                    <p className="text-[#CCCCCC]">{step.description}</p>
                   </div>
                 ))}
               </div>

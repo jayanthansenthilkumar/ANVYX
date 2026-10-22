@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { 
-  Database, 
-  FileText, 
-  Binary, 
-  Search, 
-  Sparkles, 
-  ArrowRight, 
   BookOpen, 
   AlertOctagon, 
   CheckCircle2, 
-  Zap,
   HelpCircle
 } from "lucide-react";
 import { ragPipelineStages, semanticVectorPairs } from "../data/conceptsData";
@@ -22,100 +15,107 @@ export const RagExplainer: React.FC = () => {
   const activePair = semanticVectorPairs[selectedPairIndex];
 
   return (
-    <section id="rag-concept" className="py-20 md:py-28 relative border-b border-white/10 bg-slate-950/40">
+    <section id="rag-concept" className="py-16 md:py-24 brutal-border-b bg-[#FFFFFF]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 font-mono text-xs uppercase tracking-wider">
-            <Database className="w-3.5 h-3.5" />
-            Core Architectural Breakthrough
+        {/* Header */}
+        <div className="max-w-3xl mb-12 space-y-2">
+          <div className="inline-block bg-[#111111] text-[#C8FF00] font-mono text-xs font-bold px-2 py-0.5 uppercase tracking-wider">
+            [03] // RAG_ARCHITECTURE
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
-            RAG Demystified: <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Retrieval-Augmented Generation</span>
+          <h2 className="text-3xl sm:text-5xl font-display font-black tracking-tight text-[#111111]">
+            RAG DEMYSTIFIED: <span className="bg-[#C8FF00] px-2 brutal-border-thin">GROUNDED AI</span>
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg">
-            How do you make an AI know your private college circulars, company manuals, or today's news without spending millions retraining the model? You give it an open-book library.
+          <p className="text-sm sm:text-base text-[#555555] font-medium">
+            How do you make an AI recite your private college regulations, company policies, or live timetables without spending millions retraining weights? You give it an open-book library.
           </p>
         </div>
 
-        {/* Closed-Book vs Open-Book Comparison Card */}
+        {/* Closed-Book vs Open-Book Comparison Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16">
           
           {/* Bare LLM Card */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-rose-500/20 backdrop-blur-xl space-y-4 relative overflow-hidden">
-            <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-mono font-bold">
-                Pure LLM (Without RAG)
+          <div className="p-6 brutal-card space-y-4 bg-[#FFFFFF]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#000000]">
+              <span className="bg-[#FF3E00] text-[#FFFFFF] font-mono text-xs font-bold px-2 py-0.5">
+                PURE LLM (WITHOUT RAG)
               </span>
-              <AlertOctagon className="w-5 h-5 text-rose-400" />
+              <AlertOctagon className="w-5 h-5 text-[#FF3E00]" />
             </div>
 
-            <h3 className="text-xl font-bold text-white">Closed-Book Exam</h3>
+            <h3 className="font-display font-black text-2xl text-[#111111]">
+              CLOSED-BOOK EXAM
+            </h3>
             
-            <p className="text-slate-300 text-sm leading-relaxed">
-              The model relies entirely on memories frozen in its neural weights during training months or years ago.
+            <p className="text-sm text-[#444444] font-medium leading-relaxed">
+              The model relies entirely on memories frozen in its neural network during pre-training months or years ago.
             </p>
 
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 pt-2">
+            <ul className="space-y-2 text-xs sm:text-sm font-medium text-[#222222] pt-2">
               <li className="flex items-start gap-2">
-                <span className="text-rose-400 font-bold">✗</span>
-                <span><strong className="text-white">Knowledge Cutoff:</strong> Knows zero events occurring after training.</span>
+                <span className="text-[#FF3E00] font-bold font-mono">[!]</span>
+                <span><strong>Knowledge Cutoff:</strong> Blind to any event, circular, or news occurring after training.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-rose-400 font-bold">✗</span>
-                <span><strong className="text-white">Hallucinations:</strong> Guesses plausible-sounding answers when unsure.</span>
+                <span className="text-[#FF3E00] font-bold font-mono">[!]</span>
+                <span><strong>Hallucinations:</strong> Guesses plausible-sounding answers with total confidence when unsure.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-rose-400 font-bold">✗</span>
-                <span><strong className="text-white">Blind to Private Data:</strong> No access to MKCE circulars, internal databases, or private code.</span>
+                <span className="text-[#FF3E00] font-bold font-mono">[!]</span>
+                <span><strong>Blind to Private Data:</strong> Knows nothing about internal MKCE guidelines or enterprise databases.</span>
               </li>
             </ul>
           </div>
 
           {/* RAG Enabled Card */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900/90 via-cyan-950/20 to-slate-900/90 border border-cyan-500/40 backdrop-blur-xl space-y-4 relative overflow-hidden shadow-xl shadow-cyan-500/10">
-            <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-mono font-bold">
-                RAG Architecture (Open-Book)
+          <div className="p-6 brutal-card brutal-shadow-lg space-y-4 bg-[#F4F2EB] border-2 border-[#000000]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#000000]">
+              <span className="bg-[#C8FF00] text-[#111111] font-mono text-xs font-bold px-2 py-0.5 brutal-border-thin">
+                RAG ARCHITECTURE
               </span>
-              <CheckCircle2 className="w-5 h-5 text-cyan-400" />
+              <CheckCircle2 className="w-5 h-5 text-[#111111]" />
             </div>
 
-            <h3 className="text-xl font-bold text-white">Open-Book Exam with Personal Librarian</h3>
+            <h3 className="font-display font-black text-2xl text-[#111111]">
+              OPEN-BOOK EXAM + LIBRARIAN
+            </h3>
             
-            <p className="text-slate-300 text-sm leading-relaxed">
-              When a question arrives, a vector search grabs the exact 3 pages from your private knowledge base and stuffs them into the prompt.
+            <p className="text-sm text-[#222222] font-medium leading-relaxed">
+              When a query arrives, a semantic vector search fetches the exact 3 paragraphs from your private database and injects them into the prompt.
             </p>
 
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-200 pt-2">
+            <ul className="space-y-2 text-xs sm:text-sm font-medium text-[#111111] pt-2">
               <li className="flex items-start gap-2">
-                <span className="text-cyan-400 font-bold">✓</span>
-                <span><strong className="text-white">Zero Training Cost:</strong> Update your database in 5 seconds without retraining weights.</span>
+                <span className="text-[#0038FF] font-bold font-mono">[✓]</span>
+                <span><strong>Zero Training Cost:</strong> Update your database in seconds without retraining multi-million dollar models.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-cyan-400 font-bold">✓</span>
-                <span><strong className="text-white">Exact Source Citations:</strong> Points students to chapter, page number, and PDF filename.</span>
+                <span className="text-[#0038FF] font-bold font-mono">[✓]</span>
+                <span><strong>Verifiable Source Citations:</strong> Points students directly to page numbers, circulars, and PDF names.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-cyan-400 font-bold">✓</span>
-                <span><strong className="text-white">Total Privacy:</strong> Private campus or enterprise data never leaves your infrastructure.</span>
+                <span className="text-[#0038FF] font-bold font-mono">[✓]</span>
+                <span><strong>Data Sovereignty:</strong> Confidential student records and business secrets never leak into public training sets.</span>
               </li>
             </ul>
           </div>
 
         </div>
 
-        {/* The 5-Stage RAG Pipeline Visualizer */}
-        <div className="max-w-5xl mx-auto rounded-3xl border border-white/10 bg-slate-900/80 p-6 sm:p-8 backdrop-blur-xl space-y-8">
-          <div>
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-cyan-400" />
-              The 5-Step RAG Pipeline
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
-              Click through the 5 stages to follow how a document transforms into a grounded response.
-            </p>
+        {/* 5-Step RAG Pipeline Stepper */}
+        <div className="max-w-5xl mx-auto brutal-card p-6 sm:p-8 space-y-6 bg-[#FFFFFF]">
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#000000]">
+            <div>
+              <span className="text-xs font-mono font-bold uppercase text-[#555555]">
+                // DATA FLOW PIPELINE
+              </span>
+              <h3 className="font-display font-black text-xl sm:text-2xl text-[#111111]">
+                THE 5-STEP RAG PIPELINE
+              </h3>
+            </div>
+            <span className="text-xs font-mono font-bold bg-[#111111] text-[#C8FF00] px-2 py-0.5">
+              STEP {currentStage.step} OF 5
+            </span>
           </div>
 
           {/* Stepper Buttons */}
@@ -124,53 +124,48 @@ export const RagExplainer: React.FC = () => {
               <button
                 key={stage.step}
                 onClick={() => setActiveStep(idx)}
-                className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                className={`p-3 brutal-border text-left transition cursor-pointer font-mono ${
                   activeStep === idx
-                    ? "bg-cyan-500/20 border-cyan-400 text-white shadow-lg shadow-cyan-500/20"
-                    : "bg-slate-950/80 border-white/5 text-slate-400 hover:text-white hover:bg-slate-900"
+                    ? "bg-[#111111] text-[#FFFFFF] brutal-shadow-sm translate-x-[-1px] translate-y-[-1px]"
+                    : "bg-[#F4F2EB] text-[#111111] hover:bg-[#E8E5DC]"
                 }`}
               >
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className={`w-5 h-5 rounded-full text-xs font-mono font-bold flex items-center justify-center ${
-                    activeStep === idx ? "bg-cyan-400 text-slate-950" : "bg-slate-800 text-slate-300"
-                  }`}>
-                    {stage.step}
-                  </span>
-                  {activeStep === idx && <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>}
+                <div className="flex items-center justify-between mb-1 text-xs font-bold">
+                  <span>[0{stage.step}]</span>
+                  {activeStep === idx && <span className="w-2 h-2 bg-[#C8FF00]"></span>}
                 </div>
-                <p className="text-xs font-bold truncate text-slate-200">{stage.title.split("&")[0]}</p>
-                <span className="text-[10px] text-slate-400 block truncate">{stage.techUsed.split(",")[0]}</span>
+                <p className="text-xs font-bold truncate">{stage.title.split("&")[0]}</p>
               </button>
             ))}
           </div>
 
-          {/* Active Step Showcase Card */}
-          <div className="p-6 rounded-2xl bg-slate-950/80 border border-cyan-500/30 space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-white/10">
+          {/* Active Step Panel */}
+          <div className="p-6 bg-[#F4F2EB] brutal-border space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#000000]">
               <div>
-                <span className="text-xs font-mono uppercase text-cyan-400 font-bold">
-                  Stage {currentStage.step} of 5
+                <span className="text-xs font-mono font-bold uppercase text-[#555555]">
+                  STAGE {currentStage.step}:
                 </span>
-                <h4 className="text-xl font-extrabold text-white mt-0.5">{currentStage.title}</h4>
-                <p className="text-xs text-cyan-200/70">{currentStage.subtitle}</p>
+                <h4 className="font-display font-black text-xl text-[#111111]">{currentStage.title}</h4>
+                <p className="text-xs font-mono text-[#0038FF] font-bold mt-0.5">{currentStage.subtitle}</p>
               </div>
-              <span className="text-xs px-3 py-1 rounded-full bg-slate-900 text-slate-300 border border-white/10 font-mono">
-                Tech: {currentStage.techUsed}
+              <span className="text-xs font-mono bg-[#FFFFFF] px-2.5 py-1 brutal-border-thin font-bold text-[#111111]">
+                TECH: {currentStage.techUsed}
               </span>
             </div>
 
-            <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+            <p className="text-sm sm:text-base text-[#222222] font-medium leading-relaxed">
               {currentStage.description}
             </p>
 
             {/* Analogy badge */}
-            <div className="p-4 rounded-xl bg-cyan-950/30 border border-cyan-500/20 flex items-start gap-3">
-              <BookOpen className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
-                  How to explain this to a 1st year:
+            <div className="p-3.5 bg-[#FFFFFF] brutal-border flex items-start gap-3">
+              <BookOpen className="w-5 h-5 text-[#111111] shrink-0 mt-0.5" />
+              <div className="space-y-0.5">
+                <span className="text-xs font-mono font-bold uppercase text-[#111111] block">
+                  // 1ST-YEAR ANALOGY:
                 </span>
-                <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
+                <p className="text-xs sm:text-sm text-[#444444] font-medium">
                   "{currentStage.analogy}"
                 </p>
               </div>
@@ -179,17 +174,16 @@ export const RagExplainer: React.FC = () => {
         </div>
 
         {/* Semantic Vector Space Visualizer */}
-        <div className="max-w-5xl mx-auto mt-16 rounded-3xl border border-white/10 bg-slate-900/60 p-6 sm:p-8 backdrop-blur-xl space-y-6">
+        <div className="max-w-5xl mx-auto mt-14 brutal-card p-6 sm:p-8 space-y-6 bg-[#F4F2EB]">
           <div>
-            <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase tracking-wider">
-              <Binary className="w-4 h-4" />
-              The Secret Sauce: High-Dimensional Embeddings
+            <div className="inline-block bg-[#111111] text-[#C8FF00] font-mono text-[10px] font-bold px-2 py-0.5 uppercase mb-1">
+              MATHEMATICAL ENGINE
             </div>
-            <h3 className="text-2xl font-black text-white mt-1">
-              Why Keyword Search Fails & Vector Search Triumphs
+            <h3 className="font-display font-black text-xl sm:text-2xl text-[#111111]">
+              VECTOR EMBEDDINGS & COSINE SIMILARITY
             </h3>
-            <p className="text-slate-300 text-sm">
-              Computers can't read emotions or nuance. They turn sentences into mathematical lists of numbers. Test these sample sentence pairs:
+            <p className="text-xs sm:text-sm text-[#555555] font-medium">
+              Computers do not understand words; they calculate angles between high-dimensional coordinates. Select a test pair:
             </p>
           </div>
 
@@ -199,68 +193,67 @@ export const RagExplainer: React.FC = () => {
               <button
                 key={idx}
                 onClick={() => setSelectedPairIndex(idx)}
-                className={`p-3 rounded-xl border text-left transition cursor-pointer text-xs ${
+                className={`p-3 brutal-border text-left font-mono text-xs transition cursor-pointer ${
                   selectedPairIndex === idx
-                    ? "bg-cyan-500/20 border-cyan-400 text-white font-semibold"
-                    : "bg-slate-950 text-slate-400 border-white/5 hover:text-white"
+                    ? "bg-[#111111] text-[#FFFFFF] brutal-shadow-sm font-bold"
+                    : "bg-[#FFFFFF] text-[#111111] hover:bg-[#E8E5DC]"
                 }`}
               >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-mono text-[10px] text-cyan-300">Pair #{idx + 1}</span>
-                  <span className="font-mono text-[10px] text-emerald-400">{(pair.similarity * 100).toFixed(0)}%</span>
+                <div className="flex items-center justify-between mb-1 text-[11px]">
+                  <span>PAIR #{idx + 1}</span>
+                  <span className={selectedPairIndex === idx ? "text-[#C8FF00]" : "text-[#0038FF]"}>
+                    {(pair.similarity * 100).toFixed(0)}%
+                  </span>
                 </div>
-                <p className="truncate font-medium">{pair.phraseA}</p>
+                <p className="truncate font-sans font-medium">{pair.phraseA}</p>
               </button>
             ))}
           </div>
 
-          {/* Interactive Comparison Card */}
-          <div className="p-6 rounded-2xl bg-slate-950 border border-white/10 space-y-5">
+          {/* Comparison Output Box */}
+          <div className="p-6 bg-[#FFFFFF] brutal-border space-y-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-slate-900 border border-white/5 space-y-1">
-                <span className="text-[11px] font-mono text-cyan-400 uppercase font-semibold">Phrase A (User Query):</span>
-                <p className="text-sm font-semibold text-white">"{activePair.phraseA}"</p>
+              <div className="p-3.5 bg-[#F4F2EB] brutal-border-thin space-y-1">
+                <span className="text-[10px] font-mono uppercase font-bold text-[#555555]">
+                  PHRASE A (STUDENT QUESTION):
+                </span>
+                <p className="text-sm font-bold text-[#111111]">"{activePair.phraseA}"</p>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-900 border border-white/5 space-y-1">
-                <span className="text-[11px] font-mono text-indigo-400 uppercase font-semibold">Phrase B (Handbook Chunk):</span>
-                <p className="text-sm font-semibold text-white">"{activePair.phraseB}"</p>
+              <div className="p-3.5 bg-[#F4F2EB] brutal-border-thin space-y-1">
+                <span className="text-[10px] font-mono uppercase font-bold text-[#0038FF]">
+                  PHRASE B (COLLEGE HANDBOOK CHUNK):
+                </span>
+                <p className="text-sm font-bold text-[#111111]">"{activePair.phraseB}"</p>
               </div>
             </div>
 
-            {/* Similarity Score Bar */}
+            {/* Score Metric Bar */}
             <div className="space-y-2">
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-slate-300 font-semibold flex items-center gap-1.5">
-                  <span>Cosine Similarity Score:</span>
-                  <span className="text-cyan-400 font-mono font-bold text-sm">
-                    {activePair.similarity.toFixed(2)} ({(activePair.similarity * 100).toFixed(0)}%)
+              <div className="flex justify-between items-center text-xs font-mono font-bold">
+                <span className="flex items-center gap-2">
+                  <span>COSINE SIMILARITY SCORE:</span>
+                  <span className="text-base text-[#111111] font-black bg-[#C8FF00] px-1.5 brutal-border-thin">
+                    {(activePair.similarity * 100).toFixed(0)}%
                   </span>
                 </span>
-                <span className={`px-2.5 py-0.5 rounded-full font-mono text-[11px] font-bold ${
-                  activePair.similarity > 0.8 
-                    ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40" 
-                    : activePair.similarity > 0.4
-                    ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                    : "bg-slate-800 text-slate-400 border border-white/10"
-                }`}>
+                <span className="bg-[#111111] text-[#FFFFFF] px-2 py-0.5 uppercase text-[10px]">
                   {activePair.category}
                 </span>
               </div>
 
-              {/* Progress bar */}
-              <div className="w-full h-3 rounded-full bg-slate-800 overflow-hidden p-0.5">
+              <div className="w-full h-4 bg-[#E8E5DC] brutal-border-thin p-0.5">
                 <div 
-                  className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 transition-all duration-500"
+                  className="h-full bg-[#111111] transition-all duration-300"
                   style={{ width: `${activePair.similarity * 100}%` }}
                 />
               </div>
             </div>
 
             {/* Explanation */}
-            <div className="p-3.5 rounded-xl bg-slate-900/70 border border-white/5 text-xs text-slate-300 leading-relaxed flex items-start gap-2.5">
-              <HelpCircle className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-              <span><strong className="text-white">Why this happens:</strong> {activePair.explanation}</span>
+            <div className="p-3 bg-[#F4F2EB] brutal-border-thin text-xs text-[#222222] font-mono flex items-start gap-2">
+              <HelpCircle className="w-4 h-4 text-[#111111] shrink-0 mt-0.5" />
+              <span><strong>ENGINEERING INSIGHT:</strong> {activePair.explanation}</span>
             </div>
           </div>
         </div>
