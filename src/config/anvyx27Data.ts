@@ -6,6 +6,11 @@ export interface DomainTrack {
   tags: string[];
   prompts: string[];
   gradient: string;
+  sectorCode?: string;
+  cityCode?: string;
+  color?: string;
+  districtCode?: string;
+  coordinates3D?: { x: number; y: number; z: number };
 }
 
 export interface TimelinePhase {
@@ -89,6 +94,11 @@ export const anvyx27Config = {
   domains: [
     {
       id: "ai-smart-solutions",
+      sectorCode: "DOMAIN-01",
+      cityCode: "AITech",
+      districtCode: "AI",
+      color: "#6366F1",
+      coordinates3D: { x: -2.5, y: 1.2, z: -1.8 },
       name: "AI & SMART TECH",
       tagline: "GENERATIVE AI · INTELLIGENT SYSTEMS · AUTOMATION",
       description: "Explore the power of Artificial Intelligence and intelligent technologies to solve real-world problems. Develop innovative systems using Generative AI, Machine Learning, Computer Vision, NLP, and intelligent cognitive automation.",
@@ -102,6 +112,11 @@ export const anvyx27Config = {
     },
     {
       id: "cyber-defense-security",
+      sectorCode: "DOMAIN-02",
+      cityCode: "CyberSec",
+      districtCode: "SEC",
+      color: "#9333EA",
+      coordinates3D: { x: 2.2, y: 1.5, z: -1.2 },
       name: "CYBER SAFETY",
       tagline: "CYBERSECURITY · THREAT DETECTION · SECURE SYSTEMS",
       description: "Develop innovative solutions for cybersecurity and digital defense against data breaches, malware, ransomware, and unauthorized intrusions. Explore zero-trust architectures, digital forensics, privacy preservation, and secure cloud platforms.",
@@ -115,6 +130,11 @@ export const anvyx27Config = {
     },
     {
       id: "health-wellness-tech",
+      sectorCode: "DOMAIN-03",
+      cityCode: "HealthTech",
+      districtCode: "MED",
+      color: "#F43F5E",
+      coordinates3D: { x: 0, y: 2, z: 0 },
       name: "HEALTH TECH",
       tagline: "HEALTHCARE · WELLNESS · ASSISTIVE TECHNOLOGY",
       description: "Create technology-driven solutions for digital health, clinical diagnostics, health monitoring, wearable telemetry, and mental wellness to solve urgent real-world patient and hospital challenges.",
@@ -128,6 +148,11 @@ export const anvyx27Config = {
     },
     {
       id: "green-sustainable-tech",
+      sectorCode: "DOMAIN-04",
+      cityCode: "GreenTech",
+      districtCode: "ECO",
+      color: "#10B981",
+      coordinates3D: { x: -1.8, y: 0.8, z: 1.5 },
       name: "GREEN TECH",
       tagline: "SUSTAINABILITY · ENERGY · ENVIRONMENTAL SOLUTIONS",
       description: "Engineer technology-driven solutions for environmental challenges, renewable energy optimization, waste recycling, water conservation, precision agriculture, and verifiable carbon reduction.",
@@ -141,6 +166,11 @@ export const anvyx27Config = {
     },
     {
       id: "industry-automation",
+      sectorCode: "DOMAIN-05",
+      cityCode: "SmartIndustry",
+      districtCode: "AUTO",
+      color: "#F59E0B",
+      coordinates3D: { x: 2.5, y: 0.9, z: 1.8 },
       name: "SMART INDUSTRY",
       tagline: "INDUSTRIAL AUTOMATION · IOT · SMART OPERATIONS",
       description: "Build automation-driven solutions that improve industrial throughput, workplace safety, predictive equipment maintenance, and supply-chain logistics through connected sensors and IoT.",
@@ -154,6 +184,11 @@ export const anvyx27Config = {
     },
     {
       id: "open-innovation-future",
+      sectorCode: "DOMAIN-06",
+      cityCode: "Innovation",
+      districtCode: "OPEN",
+      color: "#38BDF8",
+      coordinates3D: { x: -0.8, y: 0.5, z: 3.2 },
       name: "OPEN INNOVATION",
       tagline: "EMERGING TECHNOLOGIES · BOLD UNCONVENTIONAL SOLUTIONS",
       description: "Tackle any meaningful real-world problem with complete freedom. Interdisciplinary squads can combine cutting-edge tech, unique software, and novel hardware solutions to disrupt status-quo paradigms.",

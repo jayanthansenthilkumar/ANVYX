@@ -20,11 +20,15 @@ import { LiveFeedView } from "./components/LiveFeedView";
 import { ArrowUp } from "lucide-react";
 import { playCyberClick, playCyberHover } from "./utils/audio";
 
+import { CyberDomain3DMap } from "./components/CyberDomain3DMap";
+import { anvyx27Config, DomainTrack } from "./config/anvyx27Data";
+
 export const App: React.FC = () => {
   const [isBooting, setIsBooting] = useState<boolean>(true);
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
   const [selectedTrackId, setSelectedTrackId] = useState<string>("ai-smart-solutions");
+  const [selectedMapSector, setSelectedMapSector] = useState<DomainTrack | null>(null);
   const [currentRoute, setCurrentRoute] = useState<string>("/");
   const [activeSection, setActiveSection] = useState<string>("hero");
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
@@ -35,7 +39,9 @@ export const App: React.FC = () => {
       const path = window.location.pathname;
       const hash = window.location.hash;
 
-      if (path === "/live" || hash === "#live") {
+      if (path === "/map" || hash === "#map") {
+        setCurrentRoute("/map");
+      } else if (path === "/live" || hash === "#live") {
         setCurrentRoute("/live");
       } else if (path === "/register" || hash === "#register") {
         setIsRegisterOpen(true);
@@ -101,7 +107,11 @@ export const App: React.FC = () => {
   }, []);
 
   const handleNavigate = (path: string) => {
-    if (path === "/live") {
+    if (path === "/map") {
+      setCurrentRoute("/map");
+      window.history.pushState(null, "", "/map");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (path === "/live") {
       setCurrentRoute("/live");
       window.history.pushState(null, "", "/live");
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -144,15 +154,36 @@ export const App: React.FC = () => {
       )}
 
       {/* GLOBAL CYBER NAVBAR */}
-      <CyberNavbar
-        onRegisterClick={() => setIsRegisterOpen(true)}
-        onLoginClick={() => setIsLoginOpen(true)}
-        activeSection={activeSection}
-        onNavigate={handleNavigate}
-      />
+      {currentRoute !== "/map" && (
+        <CyberNavbar
+          onRegisterClick={() => setIsRegisterOpen(true)}
+          onLoginClick={() => setIsLoginOpen(true)}
+          activeSection={activeSection}
+          onNavigate={handleNavigate}
+        />
+      )}
 
       {/* CONDITIONAL ROUTE RENDERING */}
-      {currentRoute === "/live" ? (
+      {currentRoute === "/map" ? (
+        <CyberDomain3DMap
+          selectedSector={selectedMapSector}
+          onSelectSector={(s) => setSelectedMapSector(s)}
+          onResetView={() => setSelectedMapSector(null)}
+          isFullScreen={true}
+          onCloseFullScreen={() => {
+            setCurrentRoute("/");
+            window.history.pushState(null, "", "/#sectors");
+            setTimeout(() => {
+              const el = document.getElementById("sectors");
+              el?.scrollIntoView({ behavior: "smooth" });
+            }, 100);
+          }}
+          onRegisterClick={(id) => {
+            setSelectedTrackId(id);
+            setIsRegisterOpen(true);
+          }}
+        />
+      ) : currentRoute === "/live" ? (
         <LiveFeedView
           onBackToHome={() => {
             setCurrentRoute("/");
@@ -181,11 +212,15 @@ export const App: React.FC = () => {
             onRegisterClick={() => setIsRegisterOpen(true)}
           />
 
-          {/* SECTION 04: 6 NEURAL CITY SECTOR DOMAINS */}
+          {/* SECTION 04: 6 NEURAL CITY SECTOR DOMAINS WITH EXACT 3D INTERACTIVE MAP */}
           <SectorsDomainsSection
             onSelectTrack={(trackId) => {
               setSelectedTrackId(trackId);
               setIsRegisterOpen(true);
+            }}
+            onOpenFullscreenMap={() => {
+              setCurrentRoute("/map");
+              window.history.pushState(null, "", "/map");
             }}
           />
 
