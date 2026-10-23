@@ -68,6 +68,7 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
   const [loading, setLoading] = useState(true);
   const [loadProgress, setLoadProgress] = useState(0);
   const [hoveredSector, setHoveredSector] = useState<DomainTrack | null>(null);
+  const hoveredSectorRef = useRef<DomainTrack | null>(null);
 
   const badgeRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
@@ -106,9 +107,9 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
     const container = containerRef.current;
     if (!container) return;
 
-    let width = container.clientWidth;
-    let height = container.clientHeight;
-    if (width === 0 || height === 0) return;
+    // Use container dimensions with robust window fallback
+    let width = container.clientWidth || window.innerWidth;
+    let height = container.clientHeight || (isFullScreen ? window.innerHeight : 600);
 
     const isMobile = window.innerWidth < 768;
     const initialCamY = isMobile ? 24 : 22;
@@ -336,7 +337,7 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
         }
       },
       (err) => {
-        console.warn("GLB model load warning:", err);
+        console.warn("GLB model load error:", err);
         setLoading(false);
       }
     );
@@ -357,7 +358,6 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
         const intersectPoint = new THREE.Vector3();
         if (raycaster.ray.intersectPlane(plane, intersectPoint)) {
           for (const tri of item.worldTriangles) {
-            // Point in 2D triangle test on X-Z plane
             const pX = intersectPoint.x;
             const pZ = intersectPoint.z;
             const x1 = tri.a.x, z1 = tri.a.z;
@@ -428,11 +428,13 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
         const domain = anvyx27Config.domains.find(d => d.id === hitId);
         if (domain) {
           setHoveredSector(domain);
+          hoveredSectorRef.current = domain;
           renderer.domElement.style.cursor = "pointer";
           return;
         }
       }
       setHoveredSector(null);
+      hoveredSectorRef.current = null;
       renderer.domElement.style.cursor = "default";
     };
 
@@ -474,6 +476,8 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
 
       // Sector highlighting materials
       const activeId = activeSectorIdRef.current;
+      const hoveredId = hoveredSectorRef.current?.id;
+
       sectorMeshesRef.current.forEach(({ sectorId, borderLine, color, mesh }) => {
         const lineMat = borderLine.material as THREE.LineBasicMaterial;
         const meshMat = mesh.material as THREE.MeshStandardMaterial;
@@ -483,7 +487,7 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
           lineMat.color.set("#FFFFFF");
           meshMat.opacity = 0.22;
           meshMat.emissiveIntensity = 0.22;
-        } else if (hoveredSector?.id === sectorId) {
+        } else if (hoveredId === sectorId) {
           lineMat.opacity = 0.85;
           lineMat.color.set(color);
           meshMat.opacity = 0.14;
@@ -502,8 +506,8 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
       });
 
       // Project 3D positions to 2D HTML Badges
-      const w = container.clientWidth;
-      const h = container.clientHeight;
+      const w = container.clientWidth || window.innerWidth;
+      const h = container.clientHeight || (isFullScreen ? window.innerHeight : 600);
 
       anvyx27Config.domains.forEach((domain) => {
         const badgeEl = badgeRefs.current[domain.id];
@@ -538,31 +542,38 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
 
     renderLoop();
 
-    // Resize Observer
-    const handleResize = () => {
+    // Resize Handler
+    const updateDimensions = () => {
       if (!container || !camera || !renderer) return;
-      const nw = container.clientWidth;
-      const nh = container.clientHeight;
+      const nw = container.clientWidth || window.innerWidth;
+      const nh = container.clientHeight || (isFullScreen ? window.innerHeight : 600);
       if (nw === 0 || nh === 0) return;
       camera.aspect = nw / nh;
       camera.updateProjectionMatrix();
       renderer.setSize(nw, nh);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     };
 
-    window.addEventListener("resize", handleResize, { passive: true });
-    const ro = new ResizeObserver(handleResize);
+    window.addEventListener("resize", updateDimensions, { passive: true });
+    const ro = new ResizeObserver(updateDimensions);
     ro.observe(container);
+
+    // Initial multi-tick dimension refresh to guarantee alignment
+    const t1 = setTimeout(updateDimensions, 60);
+    const t2 = setTimeout(updateDimensions, 250);
 
     return () => {
       cancelAnimationFrame(reqId);
-      window.removeEventListener("resize", handleResize);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener("resize", updateDimensions);
       ro.disconnect();
       canvasEl.removeEventListener("pointerdown", onPointerDown);
       canvasEl.removeEventListener("pointermove", onPointerMove);
       canvasEl.removeEventListener("pointerup", onPointerUp);
       renderer.dispose();
     };
-  }, []);
+  }, [isFullScreen]);
 
   // Fly Camera to Selected Sector
   useEffect(() => {
@@ -617,7 +628,7 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
   };
 
   return (
-    <div className={`relative w-full h-full min-h-[480px] sm:min-h-[580px] lg:min-h-[640px] bg-[#050505] overflow-hidden font-sans select-none ${isFullScreen ? "fixed inset-0 z-[150] min-h-screen" : "rounded-2xl border border-[rgba(100,110,160,0.22)] shadow-[0_0_50px_rgba(0,0,0,0.8)]"}`}>
+    <div className={`relative w-full h-full ${isFullScreen ? "fixed inset-0 w-screen h-screen z-[150] bg-[#050505] overflow-hidden" : "min-h-[480px] sm:min-h-[580px] lg:min-h-[640px] bg-[#050505] overflow-hidden rounded-2xl border border-[rgba(100,110,160,0.22)] shadow-[0_0_50px_rgba(0,0,0,0.8)]"} select-none font-sans`}>
       
       {/* Three.js Canvas Container */}
       <div 
@@ -625,21 +636,21 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
         className="w-full h-full cursor-grab active:cursor-grabbing relative"
       />
 
-      {/* Loading Overlay */}
+      {/* Loading Overlay Matching HackITon /map */}
       {loading && (
-        <div className="absolute inset-0 bg-[#050505]/95 backdrop-blur-md flex flex-col items-center justify-center font-mono z-30 p-4">
-          <div className="w-12 h-12 border-3 border-[#6575F5] border-t-[#55E5D2] rounded-full animate-spin mb-4" />
-          <div className="text-xs font-bold text-[#55E5D2] uppercase tracking-widest animate-pulse">
+        <div className="absolute inset-0 bg-[#050505]/95 backdrop-blur-md flex flex-col items-center justify-center font-mono z-30 p-4 gap-3">
+          <div className="w-10 h-10 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin mb-1" />
+          <div className="text-xs font-bold text-indigo-300 uppercase tracking-widest animate-pulse">
             INITIALIZING 3D DOMAIN MATRIX...
           </div>
-          <div className="w-56 bg-[#0B0D1B] h-2 mt-4 rounded-full overflow-hidden border border-white/10">
+          <div className="w-52 bg-[#090B18] h-1.5 mt-2 rounded-full overflow-hidden border border-white/10">
             <div 
-              className="bg-gradient-to-r from-[#6575F5] via-[#8B70E8] to-[#55E5D2] h-full transition-all duration-300"
-              style={{ width: `${loadProgress || 65}%` }}
+              className="bg-gradient-to-r from-indigo-500 via-purple-500 to-rose-500 h-full transition-all duration-300"
+              style={{ width: `${loadProgress || 70}%` }}
             />
           </div>
-          <span className="text-[10px] text-gray-500 mt-2 font-mono">
-            {loadProgress}% LOADED // ASSETS PRIMED
+          <span className="text-[10px] text-slate-500 mt-0.5">
+            {loadProgress > 0 ? `${loadProgress}% LOADED` : "CONNECTING TO KPRIET SECTORS"}
           </span>
         </div>
       )}
@@ -654,7 +665,7 @@ export const CyberDomain3DMap: React.FC<CyberDomain3DMapProps> = ({
                 onCloseFullScreen?.();
               }}
               className="w-10 h-10 rounded-xl bg-[#060814]/90 hover:bg-[#6575F5]/20 border border-[rgba(100,110,160,0.25)] hover:border-[#6575F5]/60 text-[#6575F5] hover:text-white transition-all cursor-pointer flex items-center justify-center shadow-lg active:scale-95 group"
-              title="Return to Main Overview (Esc)"
+              title="Return to Domains (Esc)"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
             </button>

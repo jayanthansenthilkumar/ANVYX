@@ -24,12 +24,19 @@ import { CyberDomain3DMap } from "./components/CyberDomain3DMap";
 import { anvyx27Config, DomainTrack } from "./config/anvyx27Data";
 
 export const App: React.FC = () => {
-  const [isBooting, setIsBooting] = useState<boolean>(true);
+  const isMapRoute = typeof window !== "undefined" && (window.location.pathname === "/map" || window.location.hash === "#map");
+  const isLiveRoute = typeof window !== "undefined" && (window.location.pathname === "/live" || window.location.hash === "#live");
+
+  const [currentRoute, setCurrentRoute] = useState<string>(() => {
+    if (isMapRoute) return "/map";
+    if (isLiveRoute) return "/live";
+    return "/";
+  });
+  const [isBooting, setIsBooting] = useState<boolean>(() => !isMapRoute && !isLiveRoute);
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
   const [selectedTrackId, setSelectedTrackId] = useState<string>("ai-smart-solutions");
   const [selectedMapSector, setSelectedMapSector] = useState<DomainTrack | null>(null);
-  const [currentRoute, setCurrentRoute] = useState<string>("/");
   const [activeSection, setActiveSection] = useState<string>("hero");
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
 
@@ -248,10 +255,12 @@ export const App: React.FC = () => {
       )}
 
       {/* GLOBAL CYBER FOOTER WITH CONTACT COORDINATES */}
-      <CyberFooter
-        onRegisterClick={() => setIsRegisterOpen(true)}
-        onNavigate={handleNavigate}
-      />
+      {currentRoute !== "/map" && (
+        <CyberFooter
+          onRegisterClick={() => setIsRegisterOpen(true)}
+          onNavigate={handleNavigate}
+        />
+      )}
 
       {/* SQUAD REGISTRATION MODAL */}
       <RegisterModal
@@ -271,7 +280,7 @@ export const App: React.FC = () => {
       />
 
       {/* FLOATING QUICK SCROLL TO TOP RETICLE */}
-      {showScrollTop && (
+      {showScrollTop && currentRoute !== "/map" && (
         <button
           onClick={scrollToTop}
           onMouseEnter={playCyberHover}
